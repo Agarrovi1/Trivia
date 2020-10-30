@@ -76,7 +76,7 @@ class ResultsVC: UIViewController {
     //MARK: - LifeCyle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 1, green: 0.8688890338, blue: 0.8717179298, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.8648820519, green: 0.3310557417, blue: 0.5348803558, alpha: 1)
         setAllConstraints()
         changeButtonLabel()
 

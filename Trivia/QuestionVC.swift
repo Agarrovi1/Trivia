@@ -25,11 +25,11 @@ class QuestionVC: UIViewController {
     //MARK: - UIObject
     var questionLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .gray
+        label.backgroundColor = #colorLiteral(red: 0.8060773097, green: 0.2789019349, blue: 0.4207198077, alpha: 1)
         label.textColor = .black
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
-        label.layer.borderWidth = 2
+        label.layer.borderWidth = 3
         label.layer.borderColor = UIColor.blue.cgColor
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
