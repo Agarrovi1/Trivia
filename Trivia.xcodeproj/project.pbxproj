@@ -15,6 +15,7 @@
 		4D955040254BA431003CE5A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D95503E254BA431003CE5A1 /* LaunchScreen.storyboard */; };
 		4D95504B254BA432003CE5A1 /* TriviaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95504A254BA432003CE5A1 /* TriviaTests.swift */; };
 		4D955056254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */; };
+		4D955058254BA863003CE5A1 /* QuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D955057254BA863003CE5A1 /* QuestionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		4D95504A254BA432003CE5A1 /* TriviaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaTests.swift; sourceTree = "<group>"; };
 		4D95504C254BA432003CE5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Apprentice_TandemFor400_Data.json; sourceTree = "<group>"; };
+		4D955057254BA863003CE5A1 /* QuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				4D955035254BA428003CE5A1 /* SceneDelegate.swift */,
 				4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */,
 				4D955037254BA428003CE5A1 /* ViewController.swift */,
+				4D955057254BA863003CE5A1 /* QuestionVC.swift */,
 				4D955039254BA428003CE5A1 /* Main.storyboard */,
 				4D95503C254BA431003CE5A1 /* Assets.xcassets */,
 				4D95503E254BA431003CE5A1 /* LaunchScreen.storyboard */,
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D955058254BA863003CE5A1 /* QuestionVC.swift in Sources */,
 				4D955038254BA428003CE5A1 /* ViewController.swift in Sources */,
 				4D955034254BA428003CE5A1 /* AppDelegate.swift in Sources */,
 				4D955036254BA428003CE5A1 /* SceneDelegate.swift in Sources */,
