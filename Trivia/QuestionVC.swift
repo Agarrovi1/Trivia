@@ -10,6 +10,19 @@ import UIKit
 
 class QuestionVC: UIViewController {
     //MARK: - UIObject
+    var questionLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .gray
+        label.textColor = .black
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.layer.borderWidth = 2
+        label.layer.borderColor = UIColor.blue.cgColor
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = "Title"
+        return label
+    }()
     
     var answerButtonZero = UIButton()
     var answerButtonOne = UIButton()
@@ -43,6 +56,7 @@ class QuestionVC: UIViewController {
     
     private func addConstraints() {
         constrainStackView()
+        constrainQuestionLabel()
     }
     
     private func constrainStackView() {
@@ -63,13 +77,23 @@ class QuestionVC: UIViewController {
             answerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             answerStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)])
     }
+    
+    private func constrainQuestionLabel() {
+        view.addSubview(questionLabel)
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            questionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)])
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupButtons()
-        constrainStackView()
+        addConstraints()
 
     }
     
