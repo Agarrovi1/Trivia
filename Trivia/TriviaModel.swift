@@ -41,12 +41,9 @@ class TriviaModel {
     func isRoundQuestionsEmpty() -> Bool {
         return roundQuestions.isEmpty
     }
-    func answer(_ ans: Int) {
-        if let correct = currentQuestion?.guess(ans) {
-            if correct {
-                addScore()
-            } else {
-            }
+    func answer(isCorrect: Bool) {
+        if isCorrect {
+            addScore()
         }
     }
     

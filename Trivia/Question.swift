@@ -41,10 +41,6 @@ struct Question: Codable {
         return []
     }
     
-    func guess(_ answer: Int) -> Bool {
-        guard answer < allAnswers.count && answer >= 0 else {return false}
-        return allAnswers[answer] == correct
-    }
     func getShuffledAnswers() -> [String] {
         return allAnswers.shuffled()
     }
