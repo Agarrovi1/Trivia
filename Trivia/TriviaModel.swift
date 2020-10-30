@@ -32,7 +32,7 @@ class TriviaModel {
         }
         startIndex += 10
     }
-    func getCurrentQuestion() {
+    func getNewCurrentQuestion() {
         currentQuestion = roundQuestions.popLast()
     }
     func showCurrentQuestion() -> Question? {
@@ -41,12 +41,16 @@ class TriviaModel {
     func isRoundQuestionsEmpty() -> Bool {
         return roundQuestions.isEmpty
     }
-    func answer(_ ans: Int) {
-        if let correct = currentQuestion?.guess(ans) {
-            if correct {
-                addScore()
-            } else {
-            }
+    func answer(isCorrect: Bool) {
+        if isCorrect {
+            addScore()
+        }
+    }
+    func isQuestionPoolEmpty() -> Bool {
+        if questionPool.count - startIndex < 10 {
+            return true
+        } else {
+            return false
         }
     }
     

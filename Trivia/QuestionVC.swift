@@ -18,17 +18,18 @@ class QuestionVC: UIViewController {
     var answers = [String]() {
         didSet {
             setQuestionAndAnswers()
+            hideButton()
         }
     }
     
     //MARK: - UIObject
     var questionLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .gray
+        label.backgroundColor = #colorLiteral(red: 0.8060773097, green: 0.2789019349, blue: 0.4207198077, alpha: 1)
         label.textColor = .black
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
-        label.layer.borderWidth = 2
+        label.layer.borderWidth = 3
         label.layer.borderColor = UIColor.blue.cgColor
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
@@ -41,6 +42,15 @@ class QuestionVC: UIViewController {
     var answerButtonOne = UIButton()
     var answerButtonTwo = UIButton()
     var answerButtonThree = UIButton()
+    
+    var nextButton: UIButton = {
+        let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let arrow = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
+        button.setImage(arrow, for: .normal)
+        button.isHidden = true
+        return button
+    }()
     
     var answerStackView = UIStackView()
     
@@ -63,6 +73,8 @@ class QuestionVC: UIViewController {
         answerButtonOne.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
         answerButtonTwo.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
         answerButtonThree.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        
+        nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
     }
     private func answerWrong() {
         let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
@@ -73,16 +85,38 @@ class QuestionVC: UIViewController {
             }
         }
     }
-    
+    private func disableButtons() {
+        let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
+        for button in buttons {
+            button.isEnabled = false
+        }
+    }
+    private func hideButton() {
+        if answers.count == 3 {
+            answerButtonThree.isHidden = true
+        }
+    }
     //MARK: - Objc Functions
     @objc private func answerPressed(sender: UIButton) {
+        nextButton.isHidden = false
         if sender.titleLabel!.text == question.correct {
             sender.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+            disableButtons()
+            TriviaModel.shared.answer(isCorrect: true)
         } else {
             answerWrong()
             sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         }
-        TriviaModel.shared.answer(sender.tag)
+    }
+    @objc private func nextButtonPressed() {
+        if !TriviaModel.shared.isRoundQuestionsEmpty() {
+            TriviaModel.shared.getNewCurrentQuestion()
+            let qVC = QuestionVC()
+            navigationController?.pushViewController(qVC, animated: true)
+        } else {
+            let resultVC = ResultsVC()
+            navigationController?.pushViewController(resultVC, animated: true)
+        }
     }
     
     //MARK: - Setup
@@ -100,7 +134,6 @@ class QuestionVC: UIViewController {
     private func setQuestionAndAnswers() {
         questionLabel.text = question.question
         let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
-        print(answers)
         for index in 0..<question.allAnswers.count {
             let button = buttons[index]
             button.setTitle(answers[index], for: .normal)
@@ -110,6 +143,7 @@ class QuestionVC: UIViewController {
     
     private func addConstraints() {
         constrainStackView()
+        constrainNextButton()
         constrainQuestionLabel()
     }
     
@@ -137,10 +171,17 @@ class QuestionVC: UIViewController {
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.font = UIFont.systemFont(ofSize: 25)
         NSLayoutConstraint.activate([
-            questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            questionLabel.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 10),
             questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             questionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)])
+    }
+    private func constrainNextButton() {
+        view.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nextButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)])
     }
 
     //MARK: - LifeCycle
