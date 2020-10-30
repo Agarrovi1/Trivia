@@ -45,9 +45,7 @@ class TriviaModel {
         if let correct = currentQuestion?.guess(ans) {
             if correct {
                 addScore()
-                print("correct")
             } else {
-                print("incorrect")
             }
         }
     }
