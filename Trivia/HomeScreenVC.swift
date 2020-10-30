@@ -55,8 +55,8 @@ class HomeScreenVC: UIViewController {
             startButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)])
     }
     
-    //MARK: - Objc Methods
-    @objc private func startButtonPressed() {
+    //MARK: - Methods
+    private func setupNavController() {
         let navigationController = UINavigationController(rootViewController: QuestionVC())
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.isHidden = true
@@ -68,6 +68,12 @@ class HomeScreenVC: UIViewController {
         UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromRight, animations: {
             window.rootViewController = navigationController
         }, completion: nil)
+    }
+    
+    //MARK: - Objc Methods
+    @objc private func startButtonPressed() {
+        TriviaModel.shared.makeRoundQuestions()
+        setupNavController()
     }
 
     //MARK: - LifeCycle
