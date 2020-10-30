@@ -42,6 +42,14 @@ class QuestionVC: UIViewController {
     var answerButtonTwo = UIButton()
     var answerButtonThree = UIButton()
     
+    var nextButton: UIButton = {
+        let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let arrow = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
+        button.setImage(arrow, for: .normal)
+        return button
+    }()
+    
     var answerStackView = UIStackView()
     
     
@@ -73,11 +81,18 @@ class QuestionVC: UIViewController {
             }
         }
     }
+    private func disableButtons() {
+        let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
+        for button in buttons {
+            button.isEnabled = false
+        }
+    }
     
     //MARK: - Objc Functions
     @objc private func answerPressed(sender: UIButton) {
         if sender.titleLabel!.text == question.correct {
             sender.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+            disableButtons()
         } else {
             answerWrong()
             sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
@@ -100,7 +115,6 @@ class QuestionVC: UIViewController {
     private func setQuestionAndAnswers() {
         questionLabel.text = question.question
         let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
-        print(answers)
         for index in 0..<question.allAnswers.count {
             let button = buttons[index]
             button.setTitle(answers[index], for: .normal)
@@ -110,6 +124,7 @@ class QuestionVC: UIViewController {
     
     private func addConstraints() {
         constrainStackView()
+        constrainNextButton()
         constrainQuestionLabel()
     }
     
@@ -137,10 +152,17 @@ class QuestionVC: UIViewController {
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.font = UIFont.systemFont(ofSize: 25)
         NSLayoutConstraint.activate([
-            questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            questionLabel.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 10),
             questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             questionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)])
+    }
+    private func constrainNextButton() {
+        view.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nextButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)])
     }
 
     //MARK: - LifeCycle
