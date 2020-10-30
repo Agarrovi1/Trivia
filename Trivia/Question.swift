@@ -11,6 +11,10 @@ struct Question: Codable {
     var question: String
     var incorrect: [String]
     var correct: String
+    var allAnswers: [String] {
+        let allAnswers = incorrect + [correct]
+        return allAnswers
+    }
     
     static func getQuestions(from data: Data) throws -> [Question] {
         do {
@@ -35,5 +39,13 @@ struct Question: Codable {
             print(error)
         }
         return []
+    }
+    
+    func guess(_ answer: Int) -> Bool {
+        guard answer < allAnswers.count && answer >= 0 else {return false}
+        return allAnswers[answer] == correct
+    }
+    func getShuffledAnswers() -> [String] {
+        return allAnswers.shuffled()
     }
 }

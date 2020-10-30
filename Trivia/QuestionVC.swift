@@ -9,6 +9,18 @@
 import UIKit
 
 class QuestionVC: UIViewController {
+    //MARK: Properties
+    var question: Question = Question(question: "", incorrect: [], correct: "") {
+        didSet {
+            answers = question.getShuffledAnswers()
+        }
+    }
+    var answers = [String]() {
+        didSet {
+            setQuestionAndAnswers()
+        }
+    }
+    
     //MARK: - UIObject
     var questionLabel: UILabel = {
         let label = UILabel()
@@ -20,6 +32,7 @@ class QuestionVC: UIViewController {
         label.layer.borderColor = UIColor.blue.cgColor
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
+        label.numberOfLines = 5
         label.text = "Title"
         return label
     }()
@@ -53,6 +66,21 @@ class QuestionVC: UIViewController {
         updateButtonStyle(button: answerButtonTwo, tag: 2, title: "two")
         updateButtonStyle(button: answerButtonThree, tag: 3, title: "three")
     }
+    private func getQuestion() {
+        if let q = TriviaModel.shared.showCurrentQuestion() {
+            question = q
+        }
+    }
+    private func setQuestionAndAnswers() {
+        questionLabel.text = question.question
+        let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
+        print(answers)
+        for index in 0..<question.allAnswers.count {
+            let button = buttons[index]
+            button.setTitle(answers[index], for: .normal)
+            
+        }
+    }
     
     private func addConstraints() {
         constrainStackView()
@@ -81,11 +109,12 @@ class QuestionVC: UIViewController {
     private func constrainQuestionLabel() {
         view.addSubview(questionLabel)
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        questionLabel.font = UIFont.systemFont(ofSize: 25)
         NSLayoutConstraint.activate([
             questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             questionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)])
+            questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)])
     }
 
     //MARK: - LifeCycle
@@ -94,6 +123,7 @@ class QuestionVC: UIViewController {
         view.backgroundColor = .white
         setupButtons()
         addConstraints()
+        getQuestion()
 
     }
     

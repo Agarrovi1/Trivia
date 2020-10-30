@@ -73,6 +73,7 @@ class HomeScreenVC: UIViewController {
     //MARK: - Objc Methods
     @objc private func startButtonPressed() {
         TriviaModel.shared.makeRoundQuestions()
+        TriviaModel.shared.getCurrentQuestion()
         setupNavController()
     }
 

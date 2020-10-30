@@ -22,6 +22,9 @@ class TriviaModel {
     private func addScore() {
         score += 10
     }
+    func getScore() -> Int {
+        return score
+    }
     
     func makeRoundQuestions() {
         if questionPool.count - startIndex >= 10 {
@@ -37,6 +40,16 @@ class TriviaModel {
     }
     func isRoundQuestionsEmpty() -> Bool {
         return roundQuestions.isEmpty
+    }
+    func answer(_ ans: Int) {
+        if let correct = currentQuestion?.guess(ans) {
+            if correct {
+                addScore()
+                print("correct")
+            } else {
+                print("incorrect")
+            }
+        }
     }
     
 }
