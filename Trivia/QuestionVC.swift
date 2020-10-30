@@ -9,6 +9,18 @@
 import UIKit
 
 class QuestionVC: UIViewController {
+    //MARK: Properties
+    var question: Question = Question(question: "", incorrect: [], correct: "") {
+        didSet {
+            answers = question.getShuffledAnswers()
+        }
+    }
+    var answers = [String]() {
+        didSet {
+            setQuestionAndAnswers()
+        }
+    }
+    
     //MARK: - UIObject
     var questionLabel: UILabel = {
         let label = UILabel()
@@ -20,6 +32,7 @@ class QuestionVC: UIViewController {
         label.layer.borderColor = UIColor.blue.cgColor
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
+        label.numberOfLines = 5
         label.text = "Title"
         return label
     }()
@@ -36,7 +49,7 @@ class QuestionVC: UIViewController {
     //MARK: - Functions
     private func updateButtonStyle(button: UIButton, tag: Int,title: String) {
         view.addSubview(button)
-        button.backgroundColor = .systemPink
+        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.purple.cgColor
@@ -44,14 +57,55 @@ class QuestionVC: UIViewController {
         button.setTitle(title, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.tag = tag
-    
     }
+    private func addButtonTargets() {
+        answerButtonZero.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        answerButtonOne.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        answerButtonTwo.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        answerButtonThree.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+    }
+    private func answerWrong() {
+        let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
+        for button in buttons {
+            button.isEnabled = false
+            if button.titleLabel!.text == question.correct {
+                button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            }
+        }
+    }
+    
+    //MARK: - Objc Functions
+    @objc private func answerPressed(sender: UIButton) {
+        if sender.titleLabel!.text == question.correct {
+            sender.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        } else {
+            answerWrong()
+            sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        }
+        TriviaModel.shared.answer(sender.tag)
+    }
+    
     //MARK: - Setup
     private func setupButtons() {
         updateButtonStyle(button: answerButtonZero, tag: 0, title: "zero")
         updateButtonStyle(button: answerButtonOne, tag: 1, title: "one")
         updateButtonStyle(button: answerButtonTwo, tag: 2, title: "two")
         updateButtonStyle(button: answerButtonThree, tag: 3, title: "three")
+    }
+    private func getQuestion() {
+        if let q = TriviaModel.shared.showCurrentQuestion() {
+            question = q
+        }
+    }
+    private func setQuestionAndAnswers() {
+        questionLabel.text = question.question
+        let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
+        print(answers)
+        for index in 0..<question.allAnswers.count {
+            let button = buttons[index]
+            button.setTitle(answers[index], for: .normal)
+            
+        }
     }
     
     private func addConstraints() {
@@ -81,11 +135,12 @@ class QuestionVC: UIViewController {
     private func constrainQuestionLabel() {
         view.addSubview(questionLabel)
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        questionLabel.font = UIFont.systemFont(ofSize: 25)
         NSLayoutConstraint.activate([
             questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             questionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)])
+            questionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)])
     }
 
     //MARK: - LifeCycle
@@ -94,6 +149,8 @@ class QuestionVC: UIViewController {
         view.backgroundColor = .white
         setupButtons()
         addConstraints()
+        addButtonTargets()
+        getQuestion()
 
     }
     
