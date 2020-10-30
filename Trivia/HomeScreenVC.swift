@@ -47,11 +47,27 @@ class HomeScreenVC: UIViewController {
         view.addSubview(startButton)
         startButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
         NSLayoutConstraint.activate([
             startButton.topAnchor.constraint(equalTo: view.centerYAnchor),
             startButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)])
+    }
+    
+    //MARK: - Objc Methods
+    @objc private func startButtonPressed() {
+        let navigationController = UINavigationController(rootViewController: QuestionVC())
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.isHidden = true
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            window.rootViewController = navigationController
+        }, completion: nil)
     }
 
     //MARK: - LifeCycle
