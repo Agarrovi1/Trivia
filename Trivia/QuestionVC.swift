@@ -57,8 +57,19 @@ class QuestionVC: UIViewController {
         button.setTitle(title, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.tag = tag
-    
     }
+    private func addButtonTargets() {
+        answerButtonZero.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        answerButtonOne.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        answerButtonTwo.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        answerButtonThree.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+    }
+    
+    //MARK: - Objc Functions
+    @objc private func answerPressed(sender: UIButton) {
+        TriviaModel.shared.answer(sender.tag)
+    }
+    
     //MARK: - Setup
     private func setupButtons() {
         updateButtonStyle(button: answerButtonZero, tag: 0, title: "zero")
@@ -123,6 +134,7 @@ class QuestionVC: UIViewController {
         view.backgroundColor = .white
         setupButtons()
         addConstraints()
+        addButtonTargets()
         getQuestion()
 
     }
