@@ -46,6 +46,13 @@ class TriviaModel {
             addScore()
         }
     }
+    func isQuestionPoolEmpty() -> Bool {
+        if questionPool.count - startIndex < 10 {
+            return true
+        } else {
+            return false
+        }
+    }
     
 }
 

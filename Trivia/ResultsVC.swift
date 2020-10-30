@@ -20,13 +20,15 @@ class ResultsVC: UIViewController {
     }()
     var playButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Play another round? ", for: .normal)
+        button.setTitle("Play another round?", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 3
         button.backgroundColor = .white
-        button.titleLabel?.numberOfLines = 2
+        button.titleLabel?.numberOfLines = 3
+        button.titleLabel?.textAlignment = .center
+        button.setTitle("Finished!\n Thank you for playing!", for: .disabled)
         return button
     }()
     
@@ -49,6 +51,7 @@ class ResultsVC: UIViewController {
     private func constrainPlayButton() {
         view.addSubview(playButton)
         playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         NSLayoutConstraint.activate([
             playButton.topAnchor.constraint(equalTo: view.centerYAnchor,constant: view.frame.height * 0.05),
             playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -56,7 +59,18 @@ class ResultsVC: UIViewController {
             playButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)])
     }
     private func changeButtonLabel() {
-        
+        if TriviaModel.shared.isQuestionPoolEmpty() {
+            playButton.isEnabled = false
+            playButton.layer.borderColor = UIColor.clear.cgColor
+            playButton.backgroundColor = .clear
+        }
+    }
+    //MARK: - Objc Methods
+    @objc private func playButtonPressed() {
+        TriviaModel.shared.makeRoundQuestions()
+        TriviaModel.shared.getNewCurrentQuestion()
+        let qVC = QuestionVC()
+        navigationController?.pushViewController(qVC, animated: true)
     }
 
     //MARK: - LifeCyle
@@ -64,6 +78,7 @@ class ResultsVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1, green: 0.8688890338, blue: 0.8717179298, alpha: 1)
         setAllConstraints()
+        changeButtonLabel()
 
     }
     
