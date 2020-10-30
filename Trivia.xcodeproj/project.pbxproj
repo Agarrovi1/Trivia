@@ -18,6 +18,7 @@
 		4D955058254BA863003CE5A1 /* QuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D955057254BA863003CE5A1 /* QuestionVC.swift */; };
 		4D95505A254C5E39003CE5A1 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D955059254C5E39003CE5A1 /* HomeScreenVC.swift */; };
 		4D95505C254C6977003CE5A1 /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505B254C6977003CE5A1 /* TriviaModel.swift */; };
+		4D95505E254C6DE5003CE5A1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505D254C6DE5003CE5A1 /* Question.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		4D955057254BA863003CE5A1 /* QuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionVC.swift; sourceTree = "<group>"; };
 		4D955059254C5E39003CE5A1 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		4D95505B254C6977003CE5A1 /* TriviaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaModel.swift; sourceTree = "<group>"; };
+		4D95505D254C6DE5003CE5A1 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				4D955057254BA863003CE5A1 /* QuestionVC.swift */,
 				4D955059254C5E39003CE5A1 /* HomeScreenVC.swift */,
 				4D95505B254C6977003CE5A1 /* TriviaModel.swift */,
+				4D95505D254C6DE5003CE5A1 /* Question.swift */,
 				4D955039254BA428003CE5A1 /* Main.storyboard */,
 				4D95503C254BA431003CE5A1 /* Assets.xcassets */,
 				4D95503E254BA431003CE5A1 /* LaunchScreen.storyboard */,
@@ -218,6 +221,7 @@
 				4D955034254BA428003CE5A1 /* AppDelegate.swift in Sources */,
 				4D95505A254C5E39003CE5A1 /* HomeScreenVC.swift in Sources */,
 				4D95505C254C6977003CE5A1 /* TriviaModel.swift in Sources */,
+				4D95505E254C6DE5003CE5A1 /* Question.swift in Sources */,
 				4D955036254BA428003CE5A1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

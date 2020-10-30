@@ -9,15 +9,35 @@
 import Foundation
 class TriviaModel {
     static let shared = TriviaModel()
-    
+    private var questionPool: [Question]
+    private var roundQuestions: [Question] = []
+    private var currentQuestion: Question?
+    private var startIndex = 0
+    private var score = 0
     
     init() {
+        questionPool = Question.getAllQuestions().shuffled()
         
     }
+    private func addScore() {
+        score += 10
+    }
     
-    private func getQuestions() {}
-    private func makeRoundQuestions() {}
-    
-    func getCurrentQuestion() {}
+    func makeRoundQuestions() {
+        if questionPool.count - startIndex >= 10 {
+            roundQuestions = Array(questionPool[startIndex...(startIndex + 9)])
+        }
+        startIndex += 10
+    }
+    func getCurrentQuestion() {
+        currentQuestion = roundQuestions.popLast()
+    }
+    func showCurrentQuestion() -> Question? {
+        return currentQuestion
+    }
+    func isRoundQuestionsEmpty() -> Bool {
+        return roundQuestions.isEmpty
+    }
     
 }
+
