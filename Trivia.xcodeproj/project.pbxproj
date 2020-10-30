@@ -14,6 +14,7 @@
 		4D95503D254BA431003CE5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95503C254BA431003CE5A1 /* Assets.xcassets */; };
 		4D955040254BA431003CE5A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D95503E254BA431003CE5A1 /* LaunchScreen.storyboard */; };
 		4D95504B254BA432003CE5A1 /* TriviaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95504A254BA432003CE5A1 /* TriviaTests.swift */; };
+		4D955056254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		4D955046254BA432003CE5A1 /* TriviaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriviaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95504A254BA432003CE5A1 /* TriviaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaTests.swift; sourceTree = "<group>"; };
 		4D95504C254BA432003CE5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Apprentice_TandemFor400_Data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				4D955033254BA428003CE5A1 /* AppDelegate.swift */,
 				4D955035254BA428003CE5A1 /* SceneDelegate.swift */,
+				4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */,
 				4D955037254BA428003CE5A1 /* ViewController.swift */,
 				4D955039254BA428003CE5A1 /* Main.storyboard */,
 				4D95503C254BA431003CE5A1 /* Assets.xcassets */,
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D955056254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json in Resources */,
 				4D955040254BA431003CE5A1 /* LaunchScreen.storyboard in Resources */,
 				4D95503D254BA431003CE5A1 /* Assets.xcassets in Resources */,
 				4D95503B254BA428003CE5A1 /* Main.storyboard in Resources */,
