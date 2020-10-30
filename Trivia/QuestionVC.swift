@@ -49,7 +49,7 @@ class QuestionVC: UIViewController {
     //MARK: - Functions
     private func updateButtonStyle(button: UIButton, tag: Int,title: String) {
         view.addSubview(button)
-        button.backgroundColor = .systemPink
+        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.purple.cgColor
@@ -64,9 +64,24 @@ class QuestionVC: UIViewController {
         answerButtonTwo.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
         answerButtonThree.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
     }
+    private func answerWrong() {
+        let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
+        for button in buttons {
+            button.isEnabled = false
+            if button.titleLabel!.text == question.correct {
+                button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            }
+        }
+    }
     
     //MARK: - Objc Functions
     @objc private func answerPressed(sender: UIButton) {
+        if sender.titleLabel!.text == question.correct {
+            sender.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        } else {
+            answerWrong()
+            sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        }
         TriviaModel.shared.answer(sender.tag)
     }
     
