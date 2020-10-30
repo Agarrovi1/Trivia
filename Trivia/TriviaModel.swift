@@ -32,7 +32,7 @@ class TriviaModel {
         }
         startIndex += 10
     }
-    func getCurrentQuestion() {
+    func getNewCurrentQuestion() {
         currentQuestion = roundQuestions.popLast()
     }
     func showCurrentQuestion() -> Question? {

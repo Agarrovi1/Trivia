@@ -73,6 +73,8 @@ class QuestionVC: UIViewController {
         answerButtonOne.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
         answerButtonTwo.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
         answerButtonThree.addTarget(self, action: #selector(answerPressed(sender:)), for: .touchUpInside)
+        
+        nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
     }
     private func answerWrong() {
         let buttons = [answerButtonZero,answerButtonOne,answerButtonTwo,answerButtonThree]
@@ -90,7 +92,7 @@ class QuestionVC: UIViewController {
         }
     }
     private func hideButton() {
-        if answers.count < 4 {
+        if answers.count == 3 {
             answerButtonThree.isHidden = true
         }
     }
@@ -105,6 +107,13 @@ class QuestionVC: UIViewController {
             sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         }
         TriviaModel.shared.answer(sender.tag)
+    }
+    @objc private func nextButtonPressed() {
+        if !TriviaModel.shared.isRoundQuestionsEmpty() {
+            TriviaModel.shared.getNewCurrentQuestion()
+            let qVC = QuestionVC()
+            navigationController?.pushViewController(qVC, animated: true)
+        }
     }
     
     //MARK: - Setup
