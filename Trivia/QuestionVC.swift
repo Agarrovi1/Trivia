@@ -18,6 +18,7 @@ class QuestionVC: UIViewController {
     var answers = [String]() {
         didSet {
             setQuestionAndAnswers()
+            hideButton()
         }
     }
     
@@ -47,6 +48,7 @@ class QuestionVC: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
         let arrow = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
         button.setImage(arrow, for: .normal)
+        button.isHidden = true
         return button
     }()
     
@@ -87,9 +89,14 @@ class QuestionVC: UIViewController {
             button.isEnabled = false
         }
     }
-    
+    private func hideButton() {
+        if answers.count < 4 {
+            answerButtonThree.isHidden = true
+        }
+    }
     //MARK: - Objc Functions
     @objc private func answerPressed(sender: UIButton) {
+        nextButton.isHidden = false
         if sender.titleLabel!.text == question.correct {
             sender.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
             disableButtons()
