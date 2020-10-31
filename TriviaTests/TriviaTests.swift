@@ -30,5 +30,17 @@ class TriviaTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testTriviaModelQuestions() {
+        let isPoolEmpty = TriviaModel.shared.isQuestionPoolEmpty()
+        XCTAssert(!isPoolEmpty)
+        
+        var isRoundEmpty = TriviaModel.shared.isRoundQuestionsEmpty()
+        XCTAssert(isRoundEmpty) // should be empty at start
+        
+        TriviaModel.shared.makeRoundQuestions() //now round should have questions
+        isRoundEmpty = TriviaModel.shared.isRoundQuestionsEmpty()
+        XCTAssert(!isRoundEmpty)
+    }
 
 }

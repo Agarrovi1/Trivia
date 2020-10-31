@@ -20,6 +20,9 @@
 		4D95505C254C6977003CE5A1 /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505B254C6977003CE5A1 /* TriviaModel.swift */; };
 		4D95505E254C6DE5003CE5A1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505D254C6DE5003CE5A1 /* Question.swift */; };
 		4D955060254CA9EB003CE5A1 /* ResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505F254CA9EB003CE5A1 /* ResultsVC.swift */; };
+		4D955061254DC471003CE5A1 /* Apprentice_TandemFor400_Data.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D955055254BA6AA003CE5A1 /* Apprentice_TandemFor400_Data.json */; };
+		4D955062254DC47F003CE5A1 /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505B254C6977003CE5A1 /* TriviaModel.swift */; };
+		4D955063254DC482003CE5A1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95505D254C6DE5003CE5A1 /* Question.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D955061254DC471003CE5A1 /* Apprentice_TandemFor400_Data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +238,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D955063254DC482003CE5A1 /* Question.swift in Sources */,
+				4D955062254DC47F003CE5A1 /* TriviaModel.swift in Sources */,
 				4D95504B254BA432003CE5A1 /* TriviaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
